@@ -12,10 +12,10 @@
       <b-row>
         <b-col></b-col>
         <b-col sm="12" lg="4">
-          <b-button block variant="primary">
+          <b-button id="twitter" block variant="primary">
             <span><i class="fab fa-twitter"></i> Login Via Twitter</span>
           </b-button>
-          <b-button block variant="primary">
+          <b-button id="facebook" block variant="primary">
             <span><i class="fab fa-facebook-f"></i> Login Via facebook</span>
           </b-button>
         </b-col>
@@ -228,6 +228,14 @@ export default {
 <style scoped>
 #inputRow {
   margin-top: 20px;
+}
+#facebook{
+  background-color:
+   #3b5998;
+}
+
+#twitter{
+  background-color: #1DA1F2;
 }
 </style>
 

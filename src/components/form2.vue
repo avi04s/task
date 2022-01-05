@@ -174,7 +174,7 @@
                 </b-card-text>
               </b-tab>
               <b-tab title="Hirer">
-                <b-card-text>
+                <b-card-text class="mt-4">
                   <b-row>
                     <b-col class="mb-5" sm="12">
                       <h5>Apply as a Hirer</h5>
@@ -365,11 +365,7 @@ export default {
   color: white;
 }
 #outerRow {
-  background: linear-gradient(
-    90deg,
-    rgba(12, 71, 186, 1) 13%,
-    rgba(19, 223, 224, 1) 76%
-  );
+  background: linear-gradient(90deg, rgba(6,9,84,1) 19%, rgba(19,223,224,1) 90%);
 }
 #card {
   border-top-left-radius: 90px 60%;
