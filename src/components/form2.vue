@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container>
+    <b-container style="margin-top:100px">
       <b-row id="outerRow">
         <b-col sm="3" id="leftCol">
           <i class="fab fa-airbnb"></i>

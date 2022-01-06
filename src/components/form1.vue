@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="bv-example-row">
+    <b-container class="bv-example-row" style="margin-top:20px">
       <b-row>
         <b-col></b-col>
         <b-col sm="12" lg="4">
@@ -39,7 +39,7 @@
                 {{ e }}
               </h6>
           </span>
-          
+
         </b-col>
         <b-col></b-col>
       </b-row>

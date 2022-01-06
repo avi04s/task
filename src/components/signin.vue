@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="signin">
+    <b-container class="signin" >
       <b-row>
         <b-col></b-col>
         <b-col sm="12" lg="4">
@@ -145,7 +145,7 @@ export default {
 }
 
 .signin{
-    padding-top:100px;
+    padding-top:150px;
    
 }
 </style>
