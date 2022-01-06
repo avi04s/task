@@ -31,14 +31,15 @@
       <b-row>
         <b-col></b-col>
         <b-col>
+            
           <span v-if="error.length">
             <h3>Please correct the following errors</h3>
-            <ul>
-              <li v-for="e in error" v-bind:key="e.id">
+            
+              <h6 v-for="e in error" v-bind:key="e.id" style="color:red">
                 {{ e }}
-              </li>
-            </ul>
+              </h6>
           </span>
+          
         </b-col>
         <b-col></b-col>
       </b-row>
@@ -160,7 +161,7 @@
               >Create Login</b-button
             >
             <span>
-              Have an account? <b-button variant="link">Login</b-button>
+              Have an account? <b-button variant="link" to="/signin">Login</b-button>
             </span>
           </form>
         </b-col>

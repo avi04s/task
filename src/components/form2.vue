@@ -17,321 +17,350 @@
             <b-tabs pills align="right">
               <b-tab title="Employee" active>
                 <b-card-text class="mt-4">
-                  <b-row>
-                    <b-col class="mb-5" sm="12">
-                      <h5>Apply as a Employee</h5>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="First name"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Your Email"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                  <form @submit="signUp">
+                    <b-row>
+                      <b-col class="mb-5" sm="12">
+                        <h5>Apply as a Employee</h5>
+                        <span v-if="error.length">
+                          <h3>Please correct the following errors</h3>
 
-                  <b-row>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Last Name"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Your Phone"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                          <h6
+                            v-for="e in error"
+                            v-bind:key="e.id"
+                            style="color: red"
+                          >
+                            {{ e }}
+                          </h6>
+                        </span>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="First name"
+                            v-model="efirstname"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="email"
+                            placeholder="Your Email"
+                            v-model="email"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
 
-                  <b-row>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Password"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-select
-                        id=""
-                        class=""
-                        size=""
-                        :options="[
-                          {
-                            text: 'Please Select Your Security Question',
-                            value: null,
-                          },
-                          'A',
-                          'B',
-                        ]"
-                        :value="null"
-                      ></b-form-select>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Last Name"
+                            v-model="elastname"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Your Phone"
+                            v-model="ephone"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
 
-                  <b-row>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Confirm Password"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Enter Your Answer"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="password"
+                            placeholder="Password"
+                            v-model="epassword"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-select
+                          id=""
+                          class=""
+                          size=""
+                          :options="[
+                            {
+                              text: 'Please Select Your Security Question',
+                              value: null,
+                            },
+                            'A',
+                            'B',
+                          ]"
+                          :value="null"
+                          v-model="equestion"
+                        ></b-form-select>
+                      </b-col>
+                    </b-row>
 
-                  <b-row>
-                    <b-col align="left">
-                      <b-form-radio-group
-                        v-model="selected"
-                        :options="options"
-                        class="mb-3"
-                        value-field="item"
-                        text-field="name"
-                        disabled-field="notEnabled"
-                      ></b-form-radio-group>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="password"
+                            placeholder="Confirm Password"
+                            v-model="econfirmpassword"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Enter Your Answer"
+                            v-model="eanswer"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
 
-                  <b-row>
-                    <b-col align="right">
-                      <b-button variant="info">Register</b-button>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col align="left">
+                        <b-form-radio-group
+                          v-model="selected"
+                          :options="options"
+                          class="mb-3"
+                          value-field="item"
+                          text-field="name"
+                          disabled-field="notEnabled"
+                        ></b-form-radio-group>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col align="right">
+                        <b-button type="submit" variant="info"
+                          >Register</b-button
+                        >
+                      </b-col>
+                    </b-row>
+                  </form>
                 </b-card-text>
               </b-tab>
               <b-tab title="Hirer">
                 <b-card-text class="mt-4">
-                  <b-row>
-                    <b-col class="mb-5" sm="12">
-                      <h5>Apply as a Hirer</h5>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="First name"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Your Email"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                  <form @submit="signUp1">
+                    <b-row>
+                      <b-col class="mb-5" sm="12">
+                        <h5>Apply as a Hirer</h5>
 
-                     <b-row>
-                  
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Last Name"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Phone Number"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                        <span v-if="error1.length">
+                          <h3>Please correct the following errors</h3>
 
-                     <b-row>
-                
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Location"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Profession"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                          <h6
+                            v-for="e1 in error1"
+                            v-bind:key="e1.id"
+                            style="color: red"
+                          >
+                            {{ e1 }}
+                          </h6>
+                        </span>
+                      </b-col>
 
-                     <b-row>
-                
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Password"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                    <b-col>
-                      <b-form-group
-                        id="input-group-1"
-                        label=""
-                        label-for="input-1"
-                        description=""
-                      >
-                        <b-form-input
-                          id="input-1"
-                          type="email"
-                          placeholder="Confirm Password"
-                          required
-                        ></b-form-input>
-                      </b-form-group>
-                    </b-col>
-                  </b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="First name"
+                            v-model="hfirstname"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="email"
+                            placeholder="Your Email"
+                            v-model="hmail"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
 
-                  
-                  <b-row>
-                    <b-col align="left">
-                      <b-form-radio-group
-                        v-model="selected"
-                        :options="options"
-                        class="mb-3"
-                        value-field="item"
-                        text-field="name"
-                        disabled-field="notEnabled"
-                      ></b-form-radio-group>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Last Name"
+                            v-model="hlastname"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Phone Number"
+                            v-model="hphone"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
 
-                  <b-row>
-                    <b-col align="right">
-                      <b-button variant="info">Register</b-button>
-                    </b-col>
-                  </b-row>
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Location"
+                            v-model="hlocation"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Profession"
+                            v-model="hprofession"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Password"
+                            v-model="hpassword"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                      <b-col>
+                        <b-form-group
+                          id="input-group-1"
+                          label=""
+                          label-for="input-1"
+                          description=""
+                        >
+                          <b-form-input
+                            id="input-1"
+                            type="text"
+                            placeholder="Confirm Password"
+                            v-model="hconfirmpassword"
+                          ></b-form-input>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col align="left">
+                        <b-form-radio-group
+                          v-model="hgender"
+                          :options="options1"
+                          class="mb-3"
+                          value-field="item"
+                          text-field="name"
+                          disabled-field="notEnabled"
+                        ></b-form-radio-group>
+                      </b-col>
+                    </b-row>
+
+                    <b-row>
+                      <b-col align="right">
+                        <b-button type="submit" variant="info"
+                          >Register</b-button
+                        >
+                      </b-col>
+                    </b-row>
+                  </form>
                 </b-card-text>
               </b-tab>
             </b-tabs>
@@ -349,12 +378,120 @@ export default {
 
   data() {
     return {
-      selected: "A",
+      error: [],
+      error1: [],
+      efirstname: null,
+      email: null,
+      elastname: null,
+      ephone: null,
+      epassword: null,
+      econfirmpassword: null,
+      equestion: null,
+      eanswer: null,
+      selected: null,
       options: [
         { item: "Male", name: "Male" },
         { item: "Female", name: "Female" },
       ],
+
+    
+      options1: [
+        { item: "Male", name: "Male" },
+        { item: "Female", name: "Female" },
+      ],
+
+      hfirstname: null,
+      hmail: null,
+      hlastname: null,
+      hphone: null,
+      hlocation: null,
+      hprofession: null,
+      hpassword: null,
+      hconfirmpassword: null,
+      hgender:null,
     };
+  },
+  methods: {
+    signUp(e) {
+      this.error = [];
+      if (!this.efirstname) {
+        this.error.push("Firstname is required");
+      }
+
+      if (!this.email) {
+        this.error.push("Email is required");
+      }
+
+      if (!this.elastname) {
+        this.error.push("Last Name is required");
+      }
+
+      if (!this.ephone) {
+        this.error.push("Phone is required");
+      }
+
+      if (!this.epassword) {
+        this.error.push("Password is required");
+      }
+
+      if (!this.equestion) {
+        this.error.push("Question is required");
+      }
+
+      if (!this.econfirmpassword) {
+        this.error.push("Confirm Password is required");
+      }
+
+                  if (!this.selected) {
+        this.error.push("Gender is required");
+      }
+
+ 
+
+      e.preventDefault();
+    },
+
+    signUp1(e) {
+      this.error1 = [];
+
+      if (!this.hfirstname) {
+        this.error1.push("Firstname is required");
+      }
+
+      if (!this.hmail) {
+        this.error1.push("Email is required");
+      }
+
+      if (!this.hlastname) {
+        this.error1.push("Last Name is required");
+      }
+
+      if (!this.hphone) {
+        this.error1.push("Phone is required");
+      }
+
+      if (!this.hpassword) {
+        this.error1.push("Password is required");
+      }
+
+      if (!this.hconfirmpassword) {
+        this.error1.push("Confirm Password is required");
+      }
+
+      if (!this.hlocation) {
+        this.error1.push("Location is required");
+      }
+
+      if (!this.hprofession) {
+        this.error1.push("Password is required");
+      }
+
+              if (!this.hgender) {
+        this.error1.push("Gender is required");
+      }
+
+      e.preventDefault();
+    },
   },
 };
 </script>
@@ -365,7 +502,11 @@ export default {
   color: white;
 }
 #outerRow {
-  background: linear-gradient(90deg, rgba(6,9,84,1) 19%, rgba(19,223,224,1) 90%);
+  background: linear-gradient(
+    90deg,
+    rgba(6, 9, 84, 1) 19%,
+    rgba(19, 223, 224, 1) 90%
+  );
 }
 #card {
   border-top-left-radius: 90px 60%;
