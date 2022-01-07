@@ -120,36 +120,81 @@
       </b-row>
       <b-row>
         <b-col lg="5">
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="height:430px"
-            class="mb-2"
-          >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </b-card-text>
-          </b-card>
+          <h5>Browse Stats</h5>
+          <b-list-group>
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Cras justo odio
+              <b-badge variant="primary" pill>14</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Dapibus ac facilisis in
+              <b-badge variant="primary" pill>2</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+            <b-list-group-item
+              class="d-flex justify-content-between align-items-center"
+            >
+              Morbi leo risus
+              <b-badge variant="primary" pill>1</b-badge>
+            </b-list-group-item>
+
+       
+          </b-list-group>
         </b-col>
         <b-col lg="4">
-          <b-card
-            title="Card Title"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="height:430px"
-            class="mb-2"
-          >
-            <b-card-text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </b-card-text>
-          </b-card>
+          <h5>Browse Stats</h5>
+          <b-list-group>
+            <b-list-group-item>
+              <span> Google Chorome</span>
+            </b-list-group-item>
+            <b-list-group-item>Firefox</b-list-group-item>
+            <b-list-group-item>Internet Explorer</b-list-group-item>
+            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          </b-list-group>
         </b-col>
 
         <b-col lg="3">
@@ -162,29 +207,25 @@
             style=""
             class="mb-2"
           >
-            <b-card-text>
-            
-            </b-card-text>
+            <b-card-text> </b-card-text>
           </b-card>
 
-                 <b-card
+          <b-card
             title="Card Title"
             img-src="https://picsum.photos/600/300/?image=25"
             img-alt="Image"
             img-top
             tag="article"
-            style=""
+            style="height: 220px"
             class="mb-2"
           >
-            <b-card-text>
-              
-            </b-card-text>
+            <b-card-text> </b-card-text>
           </b-card>
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-           <b-table striped hover :items="items"></b-table>
+          <b-table striped hover :items="items"></b-table>
         </b-col>
       </b-row>
     </b-container>
@@ -198,12 +239,12 @@ export default {
     return {
       value: 33.333333333,
       max: 50,
-         items: [
-          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-          { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-          { age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
+      items: [
+        { age: 40, first_name: "Dickerson", last_name: "Macdonald" },
+        { age: 21, first_name: "Larsen", last_name: "Shaw" },
+        { age: 89, first_name: "Geneva", last_name: "Wilson" },
+        { age: 38, first_name: "Jami", last_name: "Carney" },
+      ],
     };
   },
 };
@@ -214,4 +255,5 @@ export default {
 .far {
   font-size: 30px;
 }
+
 </style>
