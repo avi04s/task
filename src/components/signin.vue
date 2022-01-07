@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-container class="signin" >
+    <b-container class="signin">
       <b-row>
         <b-col></b-col>
         <b-col sm="12" lg="4">
@@ -22,23 +22,21 @@
       </b-row>
       <b-row class="mt-3">
         <b-col></b-col>
-        <b-col sm="12">
-          -------------------------------OR----------------------------
+        <b-col sm="12" align="center">
+          <span>------------------OR-------------------</span>
         </b-col>
         <b-col></b-col>
       </b-row>
       <b-row>
         <b-col></b-col>
         <b-col>
-          
           <span v-if="error.length">
             <h3>Please correct the following errors</h3>
-            
-              <h6 v-for="e in error" v-bind:key="e.id" style="color:red">
-                {{ e }}
-              </h6>
-          </span>
 
+            <h6 v-for="e in error" v-bind:key="e.id" style="color: red">
+              {{ e }}
+            </h6>
+          </span>
         </b-col>
         <b-col></b-col>
       </b-row>
@@ -46,8 +44,6 @@
         <b-col></b-col>
         <b-col sm="12" lg="4">
           <form @submit="login">
-         
-
             <b-input-group class="mt-2">
               <b-input-group-prepend>
                 <span class="input-group-text"
@@ -62,7 +58,6 @@
               >
               </b-form-input>
             </b-input-group>
-
 
             <b-input-group class="mt-2">
               <b-input-group-prepend>
@@ -80,11 +75,22 @@
               </b-form-input>
             </b-input-group>
 
+            <b-form-checkbox class="mt-2"
+              id="checkbox-1"
+              v-model="status"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+            >
+              Remember Me
+            </b-form-checkbox>
+
             <b-button type="submit" class="mb-2 mt-2" block variant="primary"
               >Sign In</b-button
             >
             <span>
-              Create an account <b-button variant="link" to="/form1">Sign Up</b-button>
+              Create an account
+              <b-button variant="link" to="/form1">Sign Up</b-button>
             </span>
           </form>
         </b-col>
@@ -102,31 +108,29 @@ export default {
       error: [],
       email: null,
       password: null,
-      
     };
   },
   methods: {
     login(e) {
       this.error = [];
-    
-      if(!this.email){
-          this.error.push("Email is required");
+
+      if (!this.email) {
+        this.error.push("Email is required");
+      } else if (!this.validEmail(this.email)) {
+        this.error.push("Please enter valid email address");
       }
-      else if(!this.validEmail(this.email) ){
-          this.error.push("Please enter valid email address")
+
+      if (!this.password) {
+        this.error.push("passowrd is required");
       }
-      
-      if(!this.password){
-          this.error.push("passowrd is required");
-      }
-   
+
       e.preventDefault();
     },
-    validEmail: function(email){
-        var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
+    validEmail: function (email) {
+      var re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
   },
 };
 </script>
@@ -135,18 +139,16 @@ export default {
 #inputRow {
   margin-top: 20px;
 }
-#facebook{
-  background-color:
-   #3b5998;
+#facebook {
+  background-color: #3b5998;
 }
 
-#twitter{
-  background-color: #1DA1F2;
+#twitter {
+  background-color: #1da1f2;
 }
 
-.signin{
-    padding-top:150px;
-   
+.signin {
+  padding-top: 150px;
 }
 </style>
 

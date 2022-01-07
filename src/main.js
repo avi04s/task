@@ -23,6 +23,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // main.js
 import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+
+import vuetify from './plugins/vuetify'
+import Vuetify from "vuetify";
+Vue.use(Vuetify);
+
 Vue.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
 
 
@@ -34,6 +39,10 @@ Vue.use(VueSidebarMenu)
 
 
 Vue.use(VueRouter);
+
+
+
+
 
 
 
@@ -61,5 +70,6 @@ Vue.config.productionTip = false
 
 new Vue({
   router:router,
-  render: h => h(App),
+  vuetify,
+  render: h => h(App)
 }).$mount('#app')
