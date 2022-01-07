@@ -1,5 +1,14 @@
 <template>
   <div>
+
+        <Toasts
+  :show-progress="true"
+  :rtl="false"
+  :max-messages="5"
+  :time-out="3000"
+  :closeable="true"
+></Toasts>
+
     <b-container class="bv-example-row" style="margin-top:20px">
       <b-row>
         <b-col></b-col>
@@ -13,10 +22,10 @@
         <b-col></b-col>
         <b-col sm="12" lg="4">
           <b-button id="twitter" block variant="primary">
-            <span><i class="fab fa-twitter"></i> Login Via Twitter</span>
+            <span style="color:white"><i class="fab fa-twitter"></i> Login Via Twitter</span>
           </b-button>
           <b-button id="facebook" block variant="primary">
-            <span><i class="fab fa-facebook-f"></i> Login Via facebook</span>
+            <span style="color:white"><i class="fab fa-facebook-f"></i> Login Via facebook</span>
           </b-button>
         </b-col>
         <b-col></b-col>
@@ -157,7 +166,7 @@
               >
               </b-form-input>
             </b-input-group>
-            <b-button type="submit" class="mb-2" block variant="primary"
+            <b-button type="submit" class="mb-2" block variant="primary" style="color:white"
               >Create Login</b-button
             >
             <span>
@@ -190,28 +199,36 @@ export default {
     login(e) {
       this.error = [];
       if (!this.username) {
-        this.error.push("Username is required");
+        //this.error.push("Username is required");
+        this.$toast.error("Username is required");
       }
       if(!this.email){
-          this.error.push("Email is required");
+          //this.error.push("Email is required");
+          this.$toast.error("Email is required");
       }
       else if(!this.validEmail(this.email) ){
-          this.error.push("Please enter valid email address")
+          //this.error.push("Please enter valid email address");
+          this.$toast.error("Please enter valid email address");
       }
       if(!this.phone){
-          this.error.push("Phone is required");
+         // this.error.push("Phone is required");
+          this.$toast.error("Phone is required");
       }
       if(!this.job){
-          this.error.push("Select Job Type");
+         // this.error.push("Select Job Type");
+          this.$toast.error("Select Job Type");
       }
       if(!this.password){
-          this.error.push("passowrd is required");
+          //this.error.push("passowrd is required");
+          this.$toast.error("passowrd is required");
       }
       if(!this.confirm_password){
-          this.error.push("Confirm Passowrd is required");
+         // this.error.push("Confirm Passowrd is required");
+          this.$toast.error("Confirm Passowrd is required");
       }
       if(this.password != this.confirm_password){
-          this.error.push("password and confirm password did not matched")
+          //this.error.push("password and confirm password did not matched");
+          this.$toast.error("password and confirm password did not matched");
       }
 
       console.warn("Hello");

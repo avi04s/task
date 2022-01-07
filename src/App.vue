@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-nav align="right" style="background-color: black">
+    <b-nav align="right" style="background-color: #4E5E6A">
       <b-nav-item active>
         <span style="color:white"> 
           <i class="far fa-envelope"></i>
@@ -10,7 +10,20 @@
       <b-nav-item><span style="color:white"><i class="far fa-bell"></i> </span></b-nav-item>
       <b-nav-item><span style="color:white"><i class="fas fa-sign-out-alt"></i> Logout </span></b-nav-item>
     </b-nav>
-    <sidebar-menu :menu="menu" />
+  
+
+    <sidebar-menu :menu="menu" style="background-color:#4E5E6A">
+    <div slot="header" ></div>
+    <div slot="footer" ></div>
+    <span slot="toggle-icon">
+      <i class="fas fa-toggle-on"></i>
+    </span>
+    <span slot="dropdown-icon">
+       <i class="fas fa-arrow-down"></i>
+    </span>
+</sidebar-menu>
+
+
     <router-view></router-view>
 
   </div>

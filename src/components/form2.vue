@@ -1,6 +1,13 @@
 <template>
   <div>
-    <b-container style="margin-top:100px">
+    <Toasts
+      :show-progress="true"
+      :rtl="false"
+      :max-messages="5"
+      :time-out="3000"
+      :closeable="true"
+    ></Toasts>
+    <b-container style="margin-top: 100px">
       <b-row id="outerRow">
         <b-col sm="3" id="leftCol">
           <i class="fab fa-airbnb"></i>
@@ -181,7 +188,10 @@
 
                     <b-row>
                       <b-col align="right">
-                        <b-button type="submit" variant="info"
+                        <b-button
+                          type="submit"
+                          variant="info"
+                          style="color: white"
                           >Register</b-button
                         >
                       </b-col>
@@ -355,7 +365,10 @@
 
                     <b-row>
                       <b-col align="right">
-                        <b-button type="submit" variant="info"
+                        <b-button
+                          type="submit"
+                          variant="info"
+                          style="color: white"
                           >Register</b-button
                         >
                       </b-col>
@@ -394,7 +407,6 @@ export default {
         { item: "Female", name: "Female" },
       ],
 
-    
       options1: [
         { item: "Male", name: "Male" },
         { item: "Female", name: "Female" },
@@ -408,45 +420,51 @@ export default {
       hprofession: null,
       hpassword: null,
       hconfirmpassword: null,
-      hgender:null,
+      hgender: null,
     };
   },
   methods: {
     signUp(e) {
       this.error = [];
       if (!this.efirstname) {
-        this.error.push("Firstname is required");
+        //this.error.push("Firstname is required");
+        this.$toast.error("Firstname is required");
       }
 
       if (!this.email) {
-        this.error.push("Email is required");
+       // this.error.push("Email is required");
+        this.$toast.error("Email is required");
       }
 
       if (!this.elastname) {
-        this.error.push("Last Name is required");
+       // this.error.push("Last Name is required");
+        this.$toast.error("Last Name is required");
       }
 
       if (!this.ephone) {
-        this.error.push("Phone is required");
+       // this.error.push("Phone is required");
+        this.$toast.error("Phone is required");
       }
 
       if (!this.epassword) {
-        this.error.push("Password is required");
+       // this.error.push("Password is required");
+        this.$toast.error("Password is required");
       }
 
       if (!this.equestion) {
-        this.error.push("Question is required");
+       // this.error.push("Question is required");
+        this.$toast.error("Question is required");
       }
 
       if (!this.econfirmpassword) {
-        this.error.push("Confirm Password is required");
+      //  this.error.push("Confirm Password is required");
+        this.$toast.error("Confirm Password is required");
       }
 
-                  if (!this.selected) {
-        this.error.push("Gender is required");
+      if (!this.selected) {
+        //this.error.push("Gender is required");
+        this.$toast.error("Gender is required");
       }
-
- 
 
       e.preventDefault();
     },
@@ -455,39 +473,49 @@ export default {
       this.error1 = [];
 
       if (!this.hfirstname) {
-        this.error1.push("Firstname is required");
+        //this.error1.push("Firstname is required");
+        this.$toast.error("Firstname is required");
       }
 
       if (!this.hmail) {
-        this.error1.push("Email is required");
+      //  this.error1.push("Email is required");
+        this.$toast.error("Email is required");
       }
 
       if (!this.hlastname) {
-        this.error1.push("Last Name is required");
+        //this.error1.push("Last Name is required");
+        this.$toast.error("Last Name is required");
       }
 
       if (!this.hphone) {
-        this.error1.push("Phone is required");
+        //this.error1.push("Phone is required");
+        this.$toast.error("Phone is required");
       }
 
       if (!this.hpassword) {
-        this.error1.push("Password is required");
+       // this.error1.push("Password is required");
+        this.$toast.error("Password is required");
       }
 
       if (!this.hconfirmpassword) {
-        this.error1.push("Confirm Password is required");
+       // this.error1.push("Confirm Password is required");
+        this.$toast.error("Confirm Password is required");
       }
 
       if (!this.hlocation) {
-        this.error1.push("Location is required");
+       // this.error1.push("Location is required");
+        this.$toast.error("Location is required");
       }
 
       if (!this.hprofession) {
-        this.error1.push("Password is required");
+        //this.error1.push("Password is required");
+        this.$toast.error("Password is required");
       }
 
-              if (!this.hgender) {
-        this.error1.push("Gender is required");
+      if (!this.hgender) {
+        //this.error1.push("Gender is required");
+        this.$toast.error("Gender is required");
+        
       }
 
       e.preventDefault();

@@ -1,5 +1,14 @@
 <template>
   <div>
+
+    <Toasts
+  :show-progress="true"
+  :rtl="false"
+  :max-messages="5"
+  :time-out="3000"
+  :closeable="true"
+></Toasts>
+
     <b-container class="signin">
       <b-row>
         <b-col></b-col>
@@ -12,10 +21,10 @@
         <b-col></b-col>
         <b-col sm="12" lg="4">
           <b-button id="twitter" block variant="primary">
-            <span><i class="fab fa-twitter"></i> Login Via Twitter</span>
+            <span style="color:white"><i class="fab fa-twitter" ></i> Login Via Twitter</span>
           </b-button>
           <b-button id="facebook" block variant="primary">
-            <span><i class="fab fa-facebook-f"></i> Login Via facebook</span>
+            <span style="color:white"><i class="fab fa-facebook-f"></i> Login Via facebook</span>
           </b-button>
         </b-col>
         <b-col></b-col>
@@ -58,6 +67,7 @@
               >
               </b-form-input>
             </b-input-group>
+      
 
             <b-input-group class="mt-2">
               <b-input-group-prepend>
@@ -85,7 +95,7 @@
               Remember Me
             </b-form-checkbox>
 
-            <b-button type="submit" class="mb-2 mt-2" block variant="primary"
+            <b-button type="submit" class="mb-2 mt-2" block variant="primary" style="color:white"
               >Sign In</b-button
             >
             <span>
@@ -98,6 +108,8 @@
       </b-row>
     </b-container>
   </div>
+
+  
 </template>
 
 <script>
@@ -115,13 +127,16 @@ export default {
       this.error = [];
 
       if (!this.email) {
-        this.error.push("Email is required");
+        //this.error.push("Email is required");
+        this.$toast.error("Email is required");
       } else if (!this.validEmail(this.email)) {
-        this.error.push("Please enter valid email address");
+        //this.error.push("Please enter valid email address");
+        this.$toast.error("Please Enter Valid Email Address");
       }
 
       if (!this.password) {
-        this.error.push("passowrd is required");
+        //this.error.push("passowrd is required");
+         this.$toast.error("Password is required");
       }
 
       e.preventDefault();

@@ -23,9 +23,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 // main.js
 import VueSidebarMenuAkahon from "vue-sidebar-menu-akahon";
+import VueBootstrapToasts from "vue-bootstrap-toasts";
+Vue.use(VueBootstrapToasts);
 
 import vuetify from './plugins/vuetify'
 import Vuetify from "vuetify";
+
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
 Vue.use(Vuetify);
 
 Vue.component('vue-sidebar-menu-akahon', VueSidebarMenuAkahon);
