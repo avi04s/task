@@ -11,8 +11,8 @@
 
     $clientID = '790298820234-fgsvcgq9tf6s3qgl0e8uqrbpja5d4adf.apps.googleusercontent.com';
     $clientSecret = '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';
-    $redirectUrl =  'http://localhost/PHP/google-login/login.php';
-   // $redirectUrl = 'http://localhost:8080';
+    //$redirectUrl =  'http://localhost/PHP/google-login/login.php';
+    $redirectUrl = 'http://localhost:8080';
 
 
 

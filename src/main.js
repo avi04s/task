@@ -12,6 +12,7 @@ import PageNotFound from './components/PageNotFound'
 import signin from './components/signin'
 import dashboard from './components/dashboard'
 import GLogin from './components/GLogin'
+import googleLogin from './components/googleLogin'
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -67,7 +68,8 @@ const routes =[
   {path:'/home',component:Home},
   {path:'/sigin',component:signin},
   {path:'/dashboard',component:dashboard},
-  {path:'/',component:GLogin},
+  {path:'/',component:googleLogin},
+  {path:'/glogin',component:GLogin},
   {path:'*',component:PageNotFound},
   
 
