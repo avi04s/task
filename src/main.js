@@ -11,6 +11,7 @@ import Home from './components/Home'
 import PageNotFound from './components/PageNotFound'
 import signin from './components/signin'
 import dashboard from './components/dashboard'
+import GLogin from './components/GLogin'
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -47,9 +48,14 @@ Vue.use(VueRouter);
 
 
 
+import GoogleAuth from 'vue-google-login'
 
-
-
+const gauthOption = {
+  clientId: 'xxxxxxxxxxx.apps.googleusercontent.com',
+  scope: 'profile email',
+  prompt: 'select_account'
+}
+Vue.use(GoogleAuth, gauthOption)
 
 
 
@@ -58,9 +64,10 @@ const routes =[
   {path:'/form1',component:form1},
   {path:'/form2',component:form2},
   {path:'/user/:id',component:user},
-  {path:'/',component:Home},
-  {path:'/signin',component:signin},
+  {path:'/home',component:Home},
+  {path:'/sigin',component:signin},
   {path:'/dashboard',component:dashboard},
+  {path:'/',component:GLogin},
   {path:'*',component:PageNotFound},
   
 
