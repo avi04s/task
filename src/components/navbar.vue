@@ -80,6 +80,7 @@ export default {
     logout(){
       this.$session.destroy();
       this.$router.push({ path: "/" });
+      localStorage.removeItem('email');
     }
   }
 };
