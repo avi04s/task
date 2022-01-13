@@ -1,5 +1,6 @@
 <template>
   <div align="center">
+      <navbar />
     <h1>Home Component</h1>
     <b-container>
       <b-row>
@@ -233,8 +234,12 @@
 </template>
 
 <script>
+import navbar from './navbar.vue';
 export default {
   name: "Home",
+     components:{
+    navbar,
+  },
   data() {
     return {
       value: 33.333333333,

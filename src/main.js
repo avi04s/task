@@ -46,29 +46,91 @@ Vue.use(VueSidebarMenu)
 Vue.use(VueRouter);
 
 
+import VueSession from 'vue-session'
+Vue.use(VueSession)
+
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+Vue.use(VueAxios,axios);
 
 
 
+function guardMyroute(to, from, next)
+{
+ var isAuthenticated= false;
+ //var session = this.$session.get('email');
+
+if(localStorage.getItem('email'))
+  isAuthenticated = true;
+ else
+    isAuthenticated= false;
+
+ if(isAuthenticated) 
+ {
+  next(); // allow to enter route
+ } 
+ else
+ {
+  next('/'); // go to '/login';
+ }
+}
 
 
 
 
 
 const routes =[
-  {path:'/form1',component:form1},
+  
   {path:'/form2',component:form2},
   {path:'/user/:id',component:user},
-  {path:'/',component:Home},
-  {path:'/signin',component:signin},
-  {path:'/dashboard',component:dashboard},
-  {path:'*',component:PageNotFound},
+ 
+  //{path:'/home',component:Home},
+  {path:'/dashboard',beforeEnter : guardMyroute,component:dashboard},
   
-
+  {path:'/',component:signin},
+    
+  {path:'/home',component:Home,},
+  {path:'/form1',component:form1},
+  {path:'*',component:PageNotFound},
 ]
+
+
 
 const router = new VueRouter({
   routes
-})
+});
+
+
+/*
+routes.beforeEnter((to,from, next) => {
+  //const authenticated = this.$session.get('email');
+
+  if (this.$session.get('email')) {
+   
+    next({ 
+      path: '/dashboard', 
+      
+    })
+   
+  }
+  else {
+
+    next({ 
+      path: '/form1', 
+      
+    })
+  
+    //return next();
+    
+  }
+
+});*/
+
+
+
+
+
 
 Vue.config.productionTip = false
 
