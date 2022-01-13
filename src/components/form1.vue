@@ -180,7 +180,7 @@
             >
             <span>
               Have an account?
-              <b-button variant="link" to="/signin">Login</b-button>
+              <b-button variant="link" to="/">Login</b-button>
             </span>
           </form>
         </b-col>
@@ -240,7 +240,7 @@ export default {
         this.$toast.error("password and confirm password did not matched");
       } else {
         this.axios
-          .post("http://localhost/VUE%20JS/task/api/register.php", this.form)
+          .post("https://www.alegralabs.com/abhijit/api/register.php", this.form)
           .then((response) => {
             //this.$router.push('/home');
             //  console.warn("response",response);

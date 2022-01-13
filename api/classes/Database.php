@@ -3,9 +3,9 @@ class Database{
     
     // CHANGE THE DB INFO ACCORDING TO YOUR DATABASE
     private $db_host = 'localhost';
-    private $db_name = 'vuejs';
-    private $db_username = 'root';
-    private $db_password = '';
+    private $db_name = 'alegra6_abhijit';
+    private $db_username = 'alegra6_abhijit';
+    private $db_password = 'hOBdBrdyC=hm';
     
     public function dbConnection(){
         

@@ -146,7 +146,7 @@ export default {
         this.$toast.error("Password is required");
       } else {
         this.axios
-          .post("http://localhost/VUE%20JS/task/api/login.php", this.form)
+          .post("https://www.alegralabs.com/abhijit/api/login.php", this.form)
           .then((response) => {
             //this.$router.push('/home');
             //  console.warn("response",response);
