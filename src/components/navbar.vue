@@ -1,7 +1,6 @@
 <template>
   <div>
     <b-nav align="right" style="background-color: #4e5e6a">
-      
       <b-nav-item active>
         <span style="color: white">
           <i class="far fa-envelope"></i>
@@ -49,11 +48,12 @@ export default {
           hiddenOnCollapse: true,
         },
         {
-          href: "/",
-          title: "Dashboard",
+          href: "/profile",
+          title: "Profile",
           icon: "fa fa-user",
         },
-        {
+
+        /*  {
           href: "/signin",
           title: "Signin",
           icon: "fa fa-user",
@@ -72,16 +72,16 @@ export default {
               title: "Form 2",
             },
           ],
-        },
+        },*/
       ],
     };
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$session.destroy();
       this.$router.push({ path: "/" });
-      localStorage.removeItem('email');
-    }
-  }
+      localStorage.removeItem("email");
+    },
+  },
 };
 </script>

@@ -11,6 +11,7 @@ import Home from './components/Home'
 import PageNotFound from './components/PageNotFound'
 import signin from './components/signin'
 import dashboard from './components/dashboard'
+import profile from './components/profile'
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -58,23 +59,24 @@ Vue.use(VueAxios,axios);
 
 function guardMyroute(to, from, next)
 {
- var isAuthenticated= false;
- //var session = this.$session.get('email');
+    var isAuthenticated= false;
+    //var session = this.$session.get('email');
 
-if(localStorage.getItem('email'))
-  isAuthenticated = true;
- else
-    isAuthenticated= false;
+    if(localStorage.getItem('email'))
+      isAuthenticated = true;
+    else
+        isAuthenticated= false;
 
- if(isAuthenticated) 
- {
-  next(); // allow to enter route
- } 
- else
- {
-  next('/'); // go to '/login';
- }
+    if(isAuthenticated) 
+    {
+      next(); // allow to enter route
+    } 
+    else
+    {
+      next('/'); // go to '/login';
+    }
 }
+
 
 
 
@@ -87,6 +89,7 @@ const routes =[
  
   //{path:'/home',component:Home},
   {path:'/dashboard',beforeEnter : guardMyroute,component:dashboard},
+  {path:'/profile',beforeEnter : guardMyroute,component:profile},
   
   {path:'/',component:signin},
     
