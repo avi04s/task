@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <Toasts
       :show-progress="true"
       :rtl="false"
@@ -15,7 +14,7 @@
         <b-col></b-col>
         <b-col sm="12" lg="4" align="center">
           <h4></h4>
-          <h4>Update Your Profile  </h4>
+          <h4>Update Your Profile</h4>
         </b-col>
         <b-col></b-col>
       </b-row>
@@ -41,7 +40,18 @@
       <b-row id="inputRow">
         <b-col></b-col>
         <b-col sm="12" lg="4">
-          <form @submit="login">
+          <form @submit="login" enctype=multipart/form-data>
+
+            <b-input-group>
+              <b-form-input
+                class="LoginInput"
+                size="lg"
+                placeholder="Id"
+                v-model="form.id" readonly 
+              >
+              </b-form-input>
+            </b-input-group>
+
             <b-input-group>
               <b-input-group-prepend>
                 <span class="input-group-text"
@@ -67,7 +77,7 @@
                 class="LoginInput"
                 size="lg"
                 placeholder="Email address"
-                v-model="form.email" 
+                v-model="form.email" readonly
               >
               </b-form-input>
             </b-input-group>
@@ -121,21 +131,7 @@
               ></b-form-select>
             </b-input-group>
 
-            <b-input-group class="mt-2">
-              <b-input-group-prepend>
-                <span class="input-group-text"
-                  ><i class="fas fa-lock"></i
-                ></span>
-              </b-input-group-prepend>
-              <b-form-input
-                class="LoginInput"
-                size="lg"
-                type="password"
-                placeholder="Create Password"
-                v-model="form.password"
-              >
-              </b-form-input>
-            </b-input-group>
+            
             <b-input-group class="mt-2">
               <b-form-file
                 v-model="form.file"
@@ -150,6 +146,14 @@
             <div class="mt-3">
               Selected file: {{ form.file ? form.file.name : "" }}
             </div>
+           
+               <div v-if="form.file" align="center">
+                 <hr>
+                 <h6>Uploaded Photo:</h6>
+                 <img v-bind:src="this.form.file" alt="profile pic" style="width:20%">
+               </div>
+            
+
 
             <b-button
               type="submit"
@@ -170,11 +174,11 @@
 <script>
 //import router from 'vue-router'
 import navbar from "./navbar.vue";
-import Vue from 'vue';
-import axios from 'axios';
-import VueAxios from 'vue-axios';
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
 
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios, axios);
 
 export default {
   name: "profile",
@@ -194,12 +198,62 @@ export default {
         phone: null,
         password: null,
         file: null,
+        id: null,
       },
-      data:null,
+      data: null,
+       check:false,
+      correct:false,
     };
   },
 
   methods: {
+
+     passwordCheck(){
+      //console.warn(this.form.password);
+  
+
+      if(/[a-z]/.test(this.form.password)){
+        this.correct=true;
+        this.check=false;
+        
+      }
+      else{
+        this.correct = false;
+        this.check=true
+      }
+
+      if(/\d/.test(this.form.password)){
+        this.correct=true;
+        this.check=false;
+      }
+      else{
+        this.correct = false;
+        this.check=true
+      }
+
+      if(/[A-Z]/.test(this.form.password)){
+        this.correct=true;
+        this.check=false;
+      }
+      else{
+        this.correct = false;
+        this.check=true
+      }
+      var re = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/
+
+      if(re.test(this.form.password)){
+        this.correct=true;
+        this.check=false;
+      }
+      else{
+        this.correct = false;
+        this.check=true
+      }
+
+      
+    
+    },
+
     login(e) {
       this.error = [];
       if (!this.form.name) {
@@ -217,28 +271,45 @@ export default {
       } else if (!this.form.job) {
         // this.error.push("Select Job Type");
         this.$toast.error("Select Job Type");
-      } else if (!this.form.password) {
-        //this.error.push("passowrd is required");
-        this.$toast.error("passowrd is required");
-      } else if (!this.form.file) {
+      } /*else if (!this.form.file) {
         this.$toast.error("Profile Photo is required");
-      } else {
+      }*/ else {
+        
+       // console.warn("File",this.form.file.name);
+     
+       let formData = new FormData();
+       formData.append('id', this.form.id);
+       formData.append('file', this.form.file);
+       formData.append('name', this.form.name);
+       formData.append('email', this.form.email);
+
+
+       // this.form.file = e.target.files[0];  
+      
         this.axios
-          .post("http://localhost/VUE%20JS/task/api/update.php", this.form, {
+          .post("https://www.alegralabs.com/abhijit/api/update.php",formData ,{
             headers: {
-              "Content-Type": "multipart/form-data",
-            },
+              'Content-Type': 'multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL'
+            }, 
           })
           .then((response) => {
             //this.$router.push('/home');
             //console.warn("response", response);
             //console.warn("response.success", response.data.success);
-            console.warn("response.success", response);
-            if (response.data.success == "1") {
-              this.$toast.error(response.data.message);
-            } else if (response.data.success == "0") {
-              this.$toast.error(response.data.message);
-            }
+
+                 console.warn("response check", response);
+                if (response.data.success == "1") {
+                    
+                   // this.form.id = response.data.id;
+                    this.form.name = response.data.name;
+                    this.form.email = response.data.email;
+                    this.form.phone = response.data.id;
+                    this.form.file = response.data.file;
+                    this.$session.set("file", response.data.file);
+                    this.$toast.error(response.data.message);
+                } else if (response.data.success == "0") {
+                  this.$toast.error(response.data.message);
+                }
           });
       }
 
@@ -252,19 +323,23 @@ export default {
     },
 
     getData() {
-      
       const data = this.$session.get("email");
-      const url = 'http://localhost/VUE%20JS/task/api/user.php?data='+data;
-       Vue.axios
-          .get(url)
-          .then(response => {
-                console.log(response);    
-          });
+      const url = "https://www.alegralabs.com/abhijit/api/user.php?data=" + data;
+      Vue.axios.get(url).then((response) => {
+        console.log(response.data.id);
+        this.form.id = response.data.id;
+        this.form.name = response.data.name;
+        this.form.email = response.data.email;
+        this.form.phone = response.data.id;
+        this.form.file = response.data.file;
+      });
     },
 
-    /*     onChangeFileUpload(){
-        this.form.file = this.$refs.form.file.files[0];
-      }*/
+    onChangeFileUpload(e){
+       // this.form.file = this.$refs.form.file.files[0];
+        this.form.file = e.target.files[0];
+      // this.form.file = files[0];
+      }
   },
 
   created: function () {

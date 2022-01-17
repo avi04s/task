@@ -38,7 +38,7 @@ elseif (
 ) :
 
     $fields = ['fields' => ['name', 'email', 'password']];
-    $returnData = msg(0, 422, 'Please Fill in all Required Fields!', $fields,'null','null');
+    $returnData = msg(0, 422, 'Please Fill in all Required Fields!','null','null', $fields);
 
 // IF THERE ARE NO EMPTY FIELDS THEN-
 else :

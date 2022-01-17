@@ -8,13 +8,14 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 require __DIR__.'/classes/Database.php';
 require __DIR__.'/classes/JwtHandler.php';
 
-function msg($success,$status,$message,$email,$name,$extra = []){
+function msg($success,$status,$message,$email,$name,$file,$extra = []){
     return array_merge([
         'success' => $success,
         'status' => $status,
         'message' => $message,
         'email' =>$email,
-        'name' => $name
+        'name' => $name,
+        'file' => $file
     ],$extra);
 }
 
@@ -26,7 +27,7 @@ $returnData = [];
 
 // IF REQUEST METHOD IS NOT EQUAL TO POST
 if($_SERVER["REQUEST_METHOD"] != "POST"):
-    $returnData = msg(0,404,'Page Not Found!','null','null');
+    $returnData = msg(0,404,'Page Not Found!','null','null','null');
 
 // CHECKING EMPTY FIELDS
 elseif(!isset($data->email) 
@@ -36,7 +37,7 @@ elseif(!isset($data->email)
     ):
 
     $fields = ['fields' => ['email','password']];
-    $returnData = msg(0,422,'Please Fill in all Required Fields!',$fields,'null','null');
+    $returnData = msg(0,422,'Please Fill in all Required Fields!',$fields,'null','null','null');
 
 // IF THERE ARE NO EMPTY FIELDS THEN-
 else:
@@ -45,11 +46,11 @@ else:
 
     // CHECKING THE EMAIL FORMAT (IF INVALID FORMAT)
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)):
-        $returnData = msg(0,422,'Invalid Email Address!','null','null');
+        $returnData = msg(0,422,'Invalid Email Address!','null','null','null');
     
     // IF PASSWORD IS LESS THAN 8 THE SHOW THE ERROR
     elseif(strlen($password) < 8):
-        $returnData = msg(0,422,'Your password must be at least 8 characters long!','null','null');
+        $returnData = msg(0,422,'Your password must be at least 8 characters long!','null','null','null');
 
     // THE USER IS ABLE TO PERFORM THE LOGIN ACTION
     else:
@@ -81,20 +82,21 @@ else:
                         'token' => $token,
                         'email' =>$email,
                         'name' =>$row['name'],
+                        'file' =>$row['file'],
                     ];
 
                 // IF INVALID PASSWORD
                 else:
-                    $returnData = msg(0,422,'Invalid Password!','null','null');
+                    $returnData = msg(0,422,'Invalid Password!','null','null','null');
                 endif;
 
             // IF THE USER IS NOT FOUNDED BY EMAIL THEN SHOW THE FOLLOWING ERROR
             else:
-                $returnData = msg(0,422,'Invalid Email Address!','null','null');
+                $returnData = msg(0,422,'Invalid Email Address!','null','null','null');
             endif;
         }
         catch(PDOException $e){
-            $returnData = msg(0,500,$e->getMessage(),'null','null');
+            $returnData = msg(0,500,$e->getMessage(),'null','null','null');
         }
 
     endif;

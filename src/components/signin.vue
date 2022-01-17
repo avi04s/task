@@ -124,12 +124,16 @@ export default {
   data() {
     return {
       error: [],
-      form:{
+      form: {
         email: null,
         password: null,
-      }
-      
+      },
     };
+  },
+  mounted() {
+    if (localStorage.getItem("email")) {
+      this.$router.push({ path: "/dashboard" });
+    }
   },
   methods: {
     login(e) {
@@ -155,8 +159,9 @@ export default {
               this.$session.start();
               this.$session.set("email", response.data.email);
               this.$session.set("name", response.data.name);
-              localStorage.setItem('email', response.data.email)
-
+              this.$session.set("file", response.data.file);
+              localStorage.setItem("email", response.data.email);
+           
               this.$router.push({ path: "/dashboard" });
             } else if (response.data.success == "0") {
               this.$toast.error(response.data.message);

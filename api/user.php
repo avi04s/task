@@ -1,9 +1,9 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: access");
-header("Access-Control-Allow-Methods: GET");
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Headers: access");
+  header("Access-Control-Allow-Methods: GET");
+  header("Content-Type: application/json; charset=UTF-8");
+  header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 
 $host = "localhost"; /* Host name */
@@ -18,7 +18,6 @@ if (!$con) {
 }
 
 
-
 // DATA FORM REQUEST
 $data = json_decode(file_get_contents("php://input"));
 
@@ -28,17 +27,36 @@ $data = json_decode(file_get_contents("php://input"));
 $email = trim($_GET['data']);
 
 
+//$userData = mysqli_query($con,"select * from users WHERE email=".$email);
 
-$userData = mysqli_query($con,"select * from users WHERE email=".$email);
+$userData = mysqli_query($con,"select * from users WHERE email = '$email' ");
 
 $response = array();
 
+$row = mysqli_fetch_array($userData,MYSQLI_ASSOC);
+
+
+
+
+/*
 while($row = mysqli_fetch_assoc($userData)){
 
    $response[] = $row;
-}
+}*/
 
-echo json_encode($response);
+$user =  array_merge([
+  'id' => $row['id'],
+  'name' => $row['name'],
+  'email' => $row['email'],
+  'file' =>$row['file'],
+
+]);
+
+
+
+echo json_encode($user);
+
+
 exit;
 
 

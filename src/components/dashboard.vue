@@ -16,6 +16,12 @@
             class="mb-2"
           >
             <b-card-text>
+              
+               <div v-if="this.$session.get('file')" align="center" >
+                 <hr>
+                 <h6>Uploaded Photo: </h6>
+                <img v-bind:src="this.$session.get('file')" alt="profile pic" style="width:20%">
+              </div>
               Hello, {{ this.$session.get("name") }} <br>
               Your Register Email : {{ this.$session.get("email") }}
             </b-card-text>

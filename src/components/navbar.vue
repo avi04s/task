@@ -48,6 +48,11 @@ export default {
           hiddenOnCollapse: true,
         },
         {
+          href: "/dashboard",
+          title: "Dashboard",
+          icon: "fa fa-user",
+        },
+        {
           href: "/profile",
           title: "Profile",
           icon: "fa fa-user",

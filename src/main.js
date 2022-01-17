@@ -77,6 +77,16 @@ function guardMyroute(to, from, next)
     }
 }
 
+/*
+
+function check(){
+
+      if (localStorage.getItem('email')) {
+        router.replace('/');
+      }
+      
+}*/
+
 
 
 

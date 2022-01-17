@@ -1,8 +1,5 @@
 <template>
   <div>
-
-   
-
     <Toasts
       :show-progress="true"
       :rtl="false"
@@ -151,9 +148,25 @@
                 type="password"
                 placeholder="Create Password"
                 v-model="form.password"
+                @input="passwordCheck"
               >
               </b-form-input>
+
+              <b-input-group-prepend v-if="check">
+                <span class="input-group-text">
+                  <i class="fas fa-times text-danger"></i>
+                </span>
+              </b-input-group-prepend>
+              <b-input-group-prepend v-if="correct">
+                <span class="input-group-text">
+                  <i class="fas fa-check text-success"></i>
+                </span>
+              </b-input-group-prepend>
             </b-input-group>
+            <span v-if="check" class="text-danger"
+              >Note: Password must be 7 character, One Capital letter, lowercase
+              letter, number and a special character
+            </span>
 
             <b-input-group class="mt-2 mb-2">
               <b-input-group-prepend>
@@ -193,10 +206,9 @@
 <script>
 //import router from 'vue-router'
 
-
 export default {
   name: "form1",
- 
+
   data() {
     return {
       error: [],
@@ -209,9 +221,52 @@ export default {
         password: null,
         confirm_password: null,
       },
+      check: false,
+      correct: false,
     };
   },
+  mounted() {
+    if (localStorage.getItem("email")) {
+      this.$router.push({ path: "/dashboard" });
+    }
+  },
   methods: {
+    passwordCheck() {
+      //console.warn(this.form.password);
+
+      if (/[a-z]/.test(this.form.password)) {
+        this.correct = true;
+        this.check = false;
+      } else {
+        this.correct = false;
+        this.check = true;
+      }
+
+      if (/\d/.test(this.form.password)) {
+        this.correct = true;
+        this.check = false;
+      } else {
+        this.correct = false;
+        this.check = true;
+      }
+
+      if (/[A-Z]/.test(this.form.password)) {
+        this.correct = true;
+        this.check = false;
+      } else {
+        this.correct = false;
+        this.check = true;
+      }
+      var re = /[ `!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/;
+
+      if (re.test(this.form.password)) {
+        this.correct = true;
+        this.check = false;
+      } else {
+        this.correct = false;
+        this.check = true;
+      }
+    },
     login(e) {
       this.error = [];
       if (!this.form.name) {
@@ -238,9 +293,16 @@ export default {
       } else if (this.form.password != this.form.confirm_password) {
         //this.error.push("password and confirm password did not matched");
         this.$toast.error("password and confirm password did not matched");
+      } else if (this.check == true) {
+        this.$toast.error(
+          "Password must be 7 character, One Capital letter, lowercase letter, number and a special character"
+        );
       } else {
         this.axios
-          .post("https://www.alegralabs.com/abhijit/api/register.php", this.form)
+          .post(
+            "https://www.alegralabs.com/abhijit/api/register.php",
+            this.form
+          )
           .then((response) => {
             //this.$router.push('/home');
             //  console.warn("response",response);
@@ -249,7 +311,7 @@ export default {
               this.$session.start();
               this.$session.set("email", response.data.email);
               this.$session.set("name", response.data.name);
-              localStorage.setItem('email', response.data.email)
+              localStorage.setItem("email", response.data.email);
 
               this.$router.push({ path: "/dashboard" });
             } else if (response.data.success == "0") {
