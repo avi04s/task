@@ -49,6 +49,11 @@ $user =  array_merge([
   'name' => $row['name'],
   'email' => $row['email'],
   'file' =>$row['file'],
+  'phone' =>$row['phone'],
+  'gender' =>$row['gender'],
+  'current_address' =>$row['current_address'],
+  'permanent_address' =>$row['permanent_address'],
+  'designation' =>$row['designation'],
 
 ]);
 

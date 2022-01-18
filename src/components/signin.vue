@@ -108,7 +108,7 @@
             >
             <span>
               Create an account
-              <b-button variant="link" to="/form1">Sign Up</b-button>
+              <b-button variant="link" to="/reegister">Sign Up</b-button>
             </span>
           </form>
         </b-col>
@@ -156,6 +156,7 @@ export default {
             //  console.warn("response",response);
             //console.warn("response.success", response);
             if (response.data.success == "1") {
+              console.warn("response",response.data.file);
               this.$session.start();
               this.$session.set("email", response.data.email);
               this.$session.set("name", response.data.name);

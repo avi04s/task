@@ -50,34 +50,41 @@ export default {
         {
           href: "/dashboard",
           title: "Dashboard",
-          icon: "fa fa-user",
+          icon: "fa fa-home",
         },
-        {
+      /*  {
           href: "/profile",
           title: "Profile",
           icon: "fa fa-user",
         },
 
-        /*  {
+        {
           href: "/signin",
           title: "Signin",
           icon: "fa fa-user",
-        },
+        },*/
         {
           href: "#",
-          title: "Forms",
-          icon: "fa fa-chart-area",
+          title: "Setting",
+          icon: "fa fa-cog",
           child: [
             {
-              href: "/form1",
-              title: "Form 1",
+              href: "/profile",
+              title: "Profile",
+              icon: "fa fa-address-card"
             },
             {
-              href: "/form2",
-              title: "Form 2",
+              href: "/edit-profile",
+              title: "Edit Profile",
+              icon: "fa fa-edit"
+            },
+              {
+              href: "/change-password",
+              title: "Change Password",
+              icon: "fa fa-unlock-alt"
             },
           ],
-        },*/
+        },
       ],
     };
   },

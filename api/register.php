@@ -32,9 +32,14 @@ elseif (
     !isset($data->name)
     || !isset($data->email)
     || !isset($data->password)
+    || !isset($data->phone)
+    || !isset($data->gender)
     || empty(trim($data->name))
     || empty(trim($data->email))
     || empty(trim($data->password))
+    || empty(trim($data->phone))
+    || empty(trim($data->gender))
+
 ) :
 
     $fields = ['fields' => ['name', 'email', 'password']];
@@ -46,6 +51,10 @@ else :
     $name = trim($data->name);
     $email = trim($data->email);
     $password = trim($data->password);
+    $phone = trim($data->phone);
+    $gender = trim($data->gender);
+
+    
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
         $returnData = msg(0, 422, 'Invalid Email Address!','null','null');
 
@@ -67,7 +76,7 @@ else :
                 $returnData = msg(0, 422, 'This E-mail already in use!','null','null');
 
             else :
-                $insert_query = "INSERT INTO `users`(`name`,`email`,`password`) VALUES(:name,:email,:password)";
+                $insert_query = "INSERT INTO `users`(`name`,`email`,`password`,`phone`,`gender`) VALUES(:name,:email,:password, :phone, :gender)";
 
                 $insert_stmt = $conn->prepare($insert_query);
 
@@ -75,6 +84,8 @@ else :
                 $insert_stmt->bindValue(':name', htmlspecialchars(strip_tags($name)), PDO::PARAM_STR);
                 $insert_stmt->bindValue(':email', $email, PDO::PARAM_STR);
                 $insert_stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
+                $insert_stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+                $insert_stmt->bindValue(':gender', $gender, PDO::PARAM_STR);
 
                 $insert_stmt->execute();
 

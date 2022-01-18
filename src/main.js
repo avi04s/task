@@ -4,7 +4,7 @@ import Vue from 'vue'
 import './plugins/bootstrap-vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
-import form1 from './components/form1'
+//import form1 from './components/form1'
 import form2 from './components/form2'
 import user from './components/user'
 import Home from './components/Home'
@@ -12,6 +12,9 @@ import PageNotFound from './components/PageNotFound'
 import signin from './components/signin'
 import dashboard from './components/dashboard'
 import profile from './components/profile'
+import edit_profile from './components/edit_profile'
+import change_password from './components/change_password'
+import register from './components/register'
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -104,7 +107,9 @@ const routes =[
   {path:'/',component:signin},
     
   {path:'/home',component:Home,},
-  {path:'/form1',component:form1},
+  {path:'/register',component:register},
+  {path:'/edit-profile',component:edit_profile},
+  {path:'/change-password',component:change_password},
   {path:'*',component:PageNotFound},
 ]
 

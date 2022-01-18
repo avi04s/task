@@ -1,6 +1,6 @@
 <template>
   <div align="center">
-      <navbar />
+    <navbar />
     <h1>Home Component</h1>
     <b-container>
       <b-row>
@@ -178,8 +178,6 @@
               Morbi leo risus
               <b-badge variant="primary" pill>1</b-badge>
             </b-list-group-item>
-
-       
           </b-list-group>
         </b-col>
         <b-col lg="4">
@@ -234,10 +232,10 @@
 </template>
 
 <script>
-import navbar from './navbar.vue';
+import navbar from "./navbar.vue";
 export default {
   name: "Home",
-     components:{
+  components: {
     navbar,
   },
   data() {
@@ -260,5 +258,4 @@ export default {
 .far {
   font-size: 30px;
 }
-
 </style>
