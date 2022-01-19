@@ -58,6 +58,13 @@ import VueAxios from 'vue-axios';
 
 Vue.use(VueAxios,axios);
 
+// global registration in the entry file, e.g. main.js
+import VueEasyLightbox from 'vue-easy-lightbox'
+
+// Method 1. via Vue.use
+Vue.use(VueEasyLightbox)
+
+
 
 
 function guardMyroute(to, from, next)
@@ -108,8 +115,8 @@ const routes =[
     
   {path:'/home',component:Home,},
   {path:'/register',component:register},
-  {path:'/edit-profile',component:edit_profile},
-  {path:'/change-password',component:change_password},
+  {path:'/edit-profile',beforeEnter : guardMyroute,component:edit_profile},
+  {path:'/change-password',beforeEnter : guardMyroute,component:change_password},
   {path:'*',component:PageNotFound},
 ]
 

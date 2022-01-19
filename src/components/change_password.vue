@@ -30,7 +30,8 @@
               size="lg"
               type="email"
               placeholder="email"
-              v-model="form.email"
+              v-model="form.email" 
+              hidden
             >
             </b-form-input>
             <b-input-group class="mt-2 mb-2">
@@ -189,7 +190,7 @@ export default {
             //  console.warn("response",response);
             console.warn("response.success", response.data);
             if (response.data.success == "1") {
-                this.$toast.error(response.data.message);
+                this.$toast.success(response.data.message);
             } else if (response.data.success == "0") {
               this.$toast.error(response.data.message);
             }

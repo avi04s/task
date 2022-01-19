@@ -14,7 +14,20 @@
             v-bind:src="this.form.file"
             alt="Employee Photo"
             style=""
+            @click="showSingle"
           ></b-img>
+          
+          <!-- all props & events -->
+            <vue-easy-lightbox
+              escDisabled
+              moveDisabled
+              :visible="visible"
+              :imgs="imgs"
+              :index="index"
+              @hide="handleHide"
+            ></vue-easy-lightbox>
+
+
         </b-col>
         <b-col sm="12" lg="8">
           <b-card
@@ -50,6 +63,8 @@
               ><br />
               <hr />
             </b-card-text>
+
+       
           </b-card>
         </b-col>
 
@@ -64,6 +79,7 @@ import navbar from "./navbar.vue";
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VueEasyLightbox from "vue-easy-lightbox";
 
 Vue.use(VueAxios, axios);
 
@@ -71,6 +87,7 @@ export default {
   name: "profile",
   components: {
     navbar,
+    VueEasyLightbox,
   },
   data() {
     return {
@@ -83,11 +100,17 @@ export default {
         password: null,
         file: null,
         id: null,
-        gender:null,
-        designation:null,
-        current_address:null,
-        permanent_address:null,
+        gender: null,
+        designation: null,
+        current_address: null,
+        permanent_address: null,
       },
+
+      
+        imgs: "", // Img Url , string or Array of string
+        visible: false,
+        index: 0, // default: 0
+        
     };
   },
   methods: {
@@ -107,6 +130,20 @@ export default {
         this.form.current_address = response.data.current_address;
         this.form.permanent_address = response.data.permanent_address;
       });
+    },
+
+    showSingle() {
+      (this.imgs = this.$session.get("file")),
+        // or
+        //this.imgs = { title: 'this is a placeholder', src: 'http://via.placeholder.com/350x150' }
+        this.show();
+    },
+
+    show() {
+      this.visible = true;
+    },
+    handleHide() {
+      this.visible = false;
     },
   },
 

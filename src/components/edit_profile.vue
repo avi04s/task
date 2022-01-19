@@ -26,7 +26,7 @@
                 </b-form-input>
               </b-input-group>
           
-              <span class="heading">Full Name</span>
+              <span class="heading">Full Name <span class="text-danger"> *</span></span>
               <b-input-group class="mb-3">
 
                 <b-input-group-prepend>
@@ -45,7 +45,7 @@
               </b-form-input>
               </b-input-group>
               
-              <span class="heading">Phone Number</span>
+              <span class="heading">Phone Number <span class="text-danger"> *</span></span>
                 <b-input-group class="mb-3" >
                 <b-input-group-prepend>
                   <span class="input-group-text"><i class="fas fa-phone"></i></span>
@@ -72,7 +72,7 @@
                   ]" :value="null" v-model="form.gender"></b-form-select>
               </b-input-group>
 
-              <span class="heading">Designation</span>
+              <span class="heading">Designation <span class="text-danger"> *</span></span>
               <b-input-group class="mb-3">
                 <b-input-group-prepend>
                   <span class="input-group-text"><i class="fas fa-building"></i></span>
@@ -97,9 +97,9 @@
 
               <span class="heading">Employee Photo</span>
               <b-input-group class="mb-3">
-                <b-form-file v-model="form.file" :state="Boolean(form.file)"
+                <b-form-file type="" v-model="form.file" :state="Boolean(form.file)"
                   placeholder="Choose a file or drop it here..." drop-placeholder="Drop file here..." ref="form.file"
-                  v-on:change="onChangeFileUpload()"></b-form-file>
+                  v-on:change="previewImage"></b-form-file>
               </b-input-group>
 
               <div class="mt-3">
@@ -109,10 +109,11 @@
               <div v-if="form.file" align="center">
                 <hr>
                 <h6>Uploaded Photo:</h6>
-                <img v-bind:src="this.form.file" alt="profile pic" style="width:20%">
+                <img  :src="preview" alt="profile pic" style="width:50%">
+                
               </div>
 
-              <span class="heading">Current Address</span>
+              <span class="heading">Current Address <span class="text-danger"> *</span></span>
               
               <b-input-group class="mb-3">
               <b-input-group-prepend>
@@ -128,7 +129,7 @@
 
               </b-input-group>
 
-              <span class="heading">Permanent Address</span>
+              <span class="heading">Permanent Address <span class="text-danger"> *</span></span>
               
               <b-input-group>
               <b-input-group-prepend>
@@ -143,11 +144,16 @@
               ></b-form-textarea>
 
               </b-input-group>
+
+              
             
 
             
 
             </b-card>
+          </b-col>
+          <b-col>
+            <p style="padding-top:10px;color:red">Note : * Field must be fillup</p>
           </b-col>
         </b-row>
       <b-button type="submit" class="mb-2" block variant="primary" style="color: white">Update Profile</b-button>
@@ -193,8 +199,8 @@ export default {
       form: {
         name: null,
         email: null,
-       // job: null,
-       // code: null,
+        // job: null,
+        // code: null,
         phone: null,
         password: null,
         file: null,
@@ -207,6 +213,8 @@ export default {
       data: null,
       check: false,
       correct: false,
+      preview: null,
+      image: null,
     };
   },
 
@@ -262,6 +270,14 @@ export default {
       } else if (!this.form.phone) {
         // this.error.push("Phone is required");
         this.$toast.error("Phone is required");
+      } else if (!this.form.current_address) {
+        this.$toast.error("Current address required");
+      } else if (!this.form.permanent_address) {
+        this.$toast.error("Permanent address required");
+      } else if (!this.validAddress(this.form.current_address)) {
+        this.$toast.error("Address must not contain any special character");
+      } else if (!this.validAddress(this.form.permanent_address)) {
+        this.$toast.error("Address must not contain any special character");
       } else {
         /*else if (!this.form.file) {
                this.$toast.error("Profile Photo is required");
@@ -305,7 +321,7 @@ export default {
               this.form.current_address = response.data.current_address;
               this.form.permanent_address = response.data.permanent_address;
               this.$session.set("file", response.data.file);
-              this.$toast.error(response.data.message);
+              this.$toast.success(response.data.message);
             } else if (response.data.success == "0") {
               this.$toast.error(response.data.message);
             }
@@ -319,6 +335,15 @@ export default {
       var re =
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
+    },
+
+    validPhone: function (phone) {
+      var re = /^[0-9]{10}$/;
+      return re.test(phone);
+    },
+    validAddress: function (address) {
+      var re = /^[#.0-9a-zA-Z\s,-]+$/;
+      return re.test(address);
     },
 
     getData() {
@@ -339,10 +364,24 @@ export default {
       });
     },
 
-    onChangeFileUpload(e) {
+    /*  onChangeFileUpload(e) {
       // this.form.file = this.$refs.form.file.files[0];
       this.form.file = e.target.files[0];
       // this.form.file = files[0];
+
+    },*/
+
+    previewImage: function (event) {
+      this.form.file = event.target.files[0];
+      var input = event.target;
+      if (input.files) {
+        var reader = new FileReader();
+        reader.onload = (e) => {
+          this.preview = e.target.result;
+        };
+        this.image = input.files[0];
+        reader.readAsDataURL(input.files[0]);
+      }
     },
   },
 

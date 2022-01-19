@@ -90,10 +90,11 @@
             <b-form-checkbox
               class="mt-2"
               id="checkbox-1"
-              v-model="status"
+              v-model="remember_me"
               name="checkbox-1"
-              value="accepted"
-              unchecked-value="not_accepted"
+              value="true"
+              unchecked-value="false"
+              v-on:change="remember"
             >
               Remember Me
             </b-form-checkbox>
@@ -108,7 +109,7 @@
             >
             <span>
               Create an account
-              <b-button variant="link" to="/reegister">Sign Up</b-button>
+              <b-button variant="link" to="/register">Sign Up</b-button>
             </span>
           </form>
         </b-col>
@@ -125,17 +126,36 @@ export default {
     return {
       error: [],
       form: {
-        email: null,
-        password: null,
+        email: localStorage.getItem("email1"),
+        password: localStorage.getItem("password"),
       },
+      remember_me: localStorage.getItem("remember_me"),
     };
   },
+  /*
+  created(){
+    localStorage.removeItem("remember_me");
+  },*/
   mounted() {
     if (localStorage.getItem("email")) {
       this.$router.push({ path: "/dashboard" });
     }
   },
   methods: {
+    remember() {
+      //localStorage.removeItem("remember_me");
+      console.warn("hello", this.form.password);
+
+      if (this.remember_me == "true") {
+        localStorage.setItem("remember_me", this.remember_me);
+        localStorage.setItem("email1", this.form.email);
+        localStorage.setItem("password", this.form.password);
+      } else if (this.remember_me == "false") {
+        localStorage.setItem("remember_me", this.remember_me);
+        localStorage.removeItem("email1", this.form.email);
+        localStorage.removeItem("password", this.form.password);
+      }
+    },
     login(e) {
       this.error = [];
 
@@ -156,13 +176,21 @@ export default {
             //  console.warn("response",response);
             //console.warn("response.success", response);
             if (response.data.success == "1") {
-              console.warn("response",response.data.file);
+              console.warn("response", response.data.file);
               this.$session.start();
               this.$session.set("email", response.data.email);
               this.$session.set("name", response.data.name);
               this.$session.set("file", response.data.file);
               localStorage.setItem("email", response.data.email);
-           
+
+              //localStorage.setItem("remember_me",this.remember_me);
+
+              if (this.remember_me == "true") {
+                localStorage.setItem("remember_me", this.remember_me);
+                localStorage.setItem("email1", this.form.email);
+                localStorage.setItem("password", this.form.password);
+              }
+
               this.$router.push({ path: "/dashboard" });
             } else if (response.data.success == "0") {
               this.$toast.error(response.data.message);
