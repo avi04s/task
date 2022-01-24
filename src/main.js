@@ -15,6 +15,8 @@ import profile from './components/profile'
 import edit_profile from './components/edit_profile'
 import change_password from './components/change_password'
 import register from './components/register'
+import book from './components/book';
+import instagram from './components/instagram';
 
 
 import VueSidebarMenu from 'vue-sidebar-menu'
@@ -115,6 +117,8 @@ const routes =[
     
   {path:'/home',component:Home,},
   {path:'/register',component:register},
+  {path:'/book',component:book},
+  {path:'/instagram',component:instagram},
   {path:'/edit-profile',beforeEnter : guardMyroute,component:edit_profile},
   {path:'/change-password',beforeEnter : guardMyroute,component:change_password},
   {path:'*',component:PageNotFound},

@@ -77,9 +77,23 @@
             </b-list-group>
           </b-collapse>
 
-          <b-list-group-item button v-on:click="logout">
+         
+
+            <b-list-group-item  to="/book">
+            <span> <i class="fas fa-book"></i> </span>
+            <span style="padding-top: 7px; padding-left: 8px">Book</span>
+          </b-list-group-item>
+
+            <b-list-group-item  to="/instagram">
+            <span> <i class="fab fa-instagram"></i> </span>
+            <span style="padding-top: 7px; padding-left: 8px">Instagram</span>
+          </b-list-group-item>
+
+           <b-list-group-item button v-on:click="logout">
             <span style=""><i class="fas fa-sign-out-alt"></i> Logout </span>
           </b-list-group-item>
+
+
         </b-list-group>
       </div>
     </b-sidebar>
