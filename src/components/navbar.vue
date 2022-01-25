@@ -89,6 +89,11 @@
             <span style="padding-top: 7px; padding-left: 8px">Instagram</span>
           </b-list-group-item>
 
+            <b-list-group-item  to="/laptop">
+            <span> <i class="fas fa-laptop"></i> </span>
+            <span style="padding-top: 7px; padding-left: 8px">Laptop</span>
+          </b-list-group-item>
+
            <b-list-group-item button v-on:click="logout">
             <span style=""><i class="fas fa-sign-out-alt"></i> Logout </span>
           </b-list-group-item>
